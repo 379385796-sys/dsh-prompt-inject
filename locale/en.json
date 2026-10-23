@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "System Prompt Injection",
+    "description": "System-prompt template injection for DeepSeek Harness: manage named prompt templates and inject the selected one (global default plus per-workspace overrides) into every session's system prompt."
+  }
+}

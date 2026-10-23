@@ -1,0 +1,4 @@
+# Host entry id is the Settings namespace, independent of the package name.
+- insert:
+    - id: prompt-inject
+      name: dsh-prompt-inject
