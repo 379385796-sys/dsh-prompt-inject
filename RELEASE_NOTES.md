@@ -1,14 +1,9 @@
-# dsh-prompt-inject v0.1.1-rc.3.0
+# dsh-prompt-inject 0.1.1-rc.4
 
-Manage named System Prompt templates with a global default and workspace overrides.
+The exact host and three host peer ranges omitted RC3. Add RC3 explicitly while retaining ConfigForms revision fences, data formats, injection order and original H1a3x MIT attribution.
 
-- Tested environment: Windows / DSH Desktop 0.2.1-rc.2. Other platforms are not verified.
-- Prebuilt tgz, SHA-256 checksum, localized display metadata, and retained licenses.
-- Templates are stored in plaintext and transmitted to the model. Switching templates does not retract accepted requests, history, or summaries. Workspace keys preserve case and separators and are not an access-control boundary. A complete persona can exclude the injected section under host rules.
+No new features or core/Shell changes. Host range: 0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3.
 
-维护命名 System Prompt 模板，支持全局默认与工作区覆盖。
+Validation: real installed RC3 runtime, isolated official tgz installation, enable/disable/reload, settings persistence, coexistence with Packer 0.4.2, and human Desktop GUI acceptance. Three behavior tests and real ConfigForms saving, workspace overrides, draft refresh, cold restart and exactly-once main-request injection passed. RC2 automated coverage remains; full RC2 Desktop retest this maintenance is NOT TESTED.
 
-- 实测环境：Windows / DSH Desktop 0.2.1-rc.2；不扩大兼容承诺。
-- 预构建 tgz、SHA-256、中文展示资源及原有许可。
-- 模板以明文保存，并会传给模型；已接受请求、历史与摘要不会因切换模板撤回。工作区匹配保留路径大小写和分隔符差异，不是权限隔离。complete persona 会按宿主规则排除本插件的段。不能保证任意 Agent 预设均会注入。
-
+MIT licenses and third-party notices retained. Based on H1a3x/dsh-prompt-inject; H1a3x author, source disclosure, LICENSE and UPSTREAM remain intact.

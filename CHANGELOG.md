@@ -1,3 +1,9 @@
+## 0.1.1-rc.4 — 2026-10-25
+
+- Extend the explicit host and peer ranges to RC3. Retain ConfigForms revision fences, volatile configuration, template data format, injection order, H1a3x attribution and MIT license.
+- Retain prior host declarations and data formats; no new features.
+- Real RC3 host and human Desktop acceptance passed; retain RC2 automated regression, with full RC2 Desktop retest NOT TESTED.
+
 # Changelog
 
 ## 0.1.1-rc.3.0

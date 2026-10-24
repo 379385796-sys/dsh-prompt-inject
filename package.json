@@ -1,6 +1,6 @@
 {
   "name": "dsh-prompt-inject",
-  "version": "0.1.1-rc.3.0",
+  "version": "0.1.1-rc.4",
   "description": "System-prompt template injection for DeepSeek Harness: manage named prompt templates and inject the selected one (global default plus per-workspace overrides) into every session's system prompt.",
   "type": "module",
   "main": "lib/index.js",
@@ -50,7 +50,7 @@
   ],
   "engines": {
     "node": ">=24",
-    "dsh": "0.2.0-rc.2 || 0.2.1-rc.2"
+    "dsh": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "license": "MIT",
   "author": "H1a3x",
@@ -66,9 +66,9 @@
     "@deepseek-ai/cordis": "^4.0.1",
     "@deepseek-ai/schemastery": "^3.18.0",
     "react": "^18.0.0 || ^19.0.0",
-    "@deepseek-ai/dsh-settings": "0.2.0-rc.2 || 0.2.1-rc.2",
-    "@deepseek-ai/dsh-system-prompt": "0.2.0-rc.2 || 0.2.1-rc.2",
-    "@deepseek-ai/dsh-client-ui-settings": "0.2.0-rc.2 || 0.2.1-rc.2"
+    "@deepseek-ai/dsh-settings": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-settings": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "scripts": {
     "build": "node --check lib/index.js && node --check lib/client.js",

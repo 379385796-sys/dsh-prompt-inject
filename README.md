@@ -1,5 +1,12 @@
 # 系统提示词注入（dsh-prompt-inject）
 
+## 0.1.1-rc.4 兼容性维护（2026-10-25）
+
+宿主范围：`0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3`。本次以 Windows Desktop 0.2.1-rc.3 / Electron 44.7.0 / Node 24.21.0 实测。修复加载前版本拒绝，不新增功能。
+
+隔离真实宿主、三插件与 Packer 0.4.2 共存、启停、设置与重启回归已验证；用户完成真实 Desktop GUI 验收。3 项行为测试及真实 ConfigForms 保存、Workspace 覆盖、草稿刷新、冷重启与主请求单次注入检查通过。保留原 RC2 支持及自动测试；本轮完整 RC2 Desktop 复测为 NOT TESTED。具体边界见 [兼容性记录](docs/COMPATIBILITY.md)。
+
+
 [English](README.en.md)
 
 维护命名 System Prompt 模板，支持全局默认与工作区覆盖。
@@ -8,7 +15,7 @@
 
 ## 兼容性与状态
 
-版本 **0.1.1-rc.3.0**。本轮实际验证平台：Windows、DSH Desktop **0.2.1-rc.2**。其他平台未测试，不声明支持。
+版本 **0.1.1-rc.4**。当前实测：Windows、DSH Desktop **0.2.1-rc.3**；保留此前 RC2 支持和自动回归，本轮 RC2 Desktop 全量复测为 NOT TESTED。其他平台未测试。
 
 模板以明文保存，并会传给模型；已接受请求、历史与摘要不会因切换模板撤回。工作区匹配保留路径大小写和分隔符差异，不是权限隔离。complete persona 会按宿主规则排除本插件的段。不能保证任意 Agent 预设均会注入。
 
