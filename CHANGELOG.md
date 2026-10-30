@@ -1,3 +1,9 @@
+## 0.1.1-rc.5 — 2026-10-30
+
+- Add DSH Desktop 0.2.1-rc.5 explicitly to the verified host range; retain previous supported versions.
+- Add RC5 to the three actually used host peer ranges. Preserve ConfigForms revision fences, volatile Profile settings, workspace selection, injection order and H1a3x MIT attribution. No functional code changes.
+- Validation scope: isolated Windows rc.5 Host and browser, core plugin behavior and three-plugin coexistence; no formal installation or publication in this stage.
+
 ## 0.1.1-rc.4 — 2026-10-25
 
 - Extend the explicit host and peer ranges to RC3. Retain ConfigForms revision fences, volatile configuration, template data format, injection order, H1a3x attribution and MIT license.

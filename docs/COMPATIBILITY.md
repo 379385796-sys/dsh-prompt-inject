@@ -18,3 +18,9 @@ Installed target verified from immutable app.asar metadata: DSH and Shell 0.2.1-
 Extend the explicit host and peer ranges to RC3. Retain ConfigForms revision fences, volatile configuration, template data format, injection order, H1a3x attribution and MIT license.
 
 Three behavior tests and real ConfigForms saving, workspace overrides, draft refresh, cold restart and exactly-once main-request injection passed. All three maintained plugins coexist with Packer 0.4.2 in an isolated RC3 Profile; the final headless Web-host pass has no page, console or HTTP errors. The human user completed actual Desktop GUI checks. Headless and Desktop results are recorded separately. No compatibility exemption was used. Prior RC2 support remains; full RC2 Desktop retesting this maintenance is NOT TESTED. The legacy 0.2.0-rc.2 declaration is retained, not newly certified.
+
+## 0.1.1-rc.5 — rc.5 maintenance (2026-10-30)
+
+Target: DSH Desktop 0.2.1-rc.5, Windows x64, Electron 44.7.0 / Node 24.21.0 / ABI 149. Exact host range: `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Add RC5 to the three actually used host peer ranges. Preserve ConfigForms revision fences, volatile Profile settings, workspace selection, injection order and H1a3x MIT attribution. No functional code changes.
+
+Core behavior is checked on an isolated rc.5 Host/browser with synthetic sessions and deterministic offline model output, followed by three-plugin coexistence and the unchanged Packer 0.4.3 candidate dependency precheck. Earlier RC2/RC3 evidence remains; those full Desktop GUI checks are not repeated here. No formal Profile or DSH core modification.

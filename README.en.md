@@ -1,5 +1,9 @@
 # System Prompt Injection (dsh-prompt-inject)
 
+## 0.1.1-rc.5 rc.5 compatibility maintenance (2026-10-30)
+
+Host range: `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Declaration-only maintenance after checking the used interfaces; no feature, UI or data-format change. Validation targets an isolated Windows rc.5 Host and browser. Formal installation is a separate stage. Older sections below are historical records.
+
 ## 0.1.1-rc.4 compatibility maintenance (2026-10-25)
 
 Explicit host range: `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3`. Target: Windows Desktop 0.2.1-rc.3, Electron 44.7.0, Node 24.21.0. The exact host and three host peer ranges omitted RC3. Add RC3 explicitly while retaining ConfigForms revision fences, data formats, injection order and original H1a3x MIT attribution.
@@ -15,7 +19,7 @@ A locally maintained adaptation of [H1a3x/dsh-prompt-inject](https://github.com/
 
 ## Compatibility and status
 
-Version **0.1.1-rc.4**. Current target: Windows DSH Desktop **0.2.1-rc.3**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
+Version **0.1.1-rc.5**. Current target: Windows DSH Desktop **0.2.1-rc.5**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
 
 Templates are stored in plaintext and transmitted to the model. Switching templates does not retract accepted requests, history, or summaries. Workspace keys preserve case and separators and are not an access-control boundary. A complete persona can exclude the injected section under host rules.
 
