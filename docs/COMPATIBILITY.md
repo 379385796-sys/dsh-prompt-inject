@@ -1,5 +1,16 @@
 # Compatibility / 兼容与验证
 
+## 当前范围 / Current scope
+
+- Package **0.1.1-rc.5** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`; Node **24+**.
+- Current published target: Windows x64 DSH Desktop **0.2.1-rc.5**. See [v0.1.1-rc.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5). Source baseline: `ea9e49ce04fe9ce14ca52f877055529c95d3b827`.
+- 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3 测试数量与安装状态是对应日期的历史记录；本轮仅检查文档，没有重新运行功能或桌面验收。
+- Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3 records below retain their dates and scope; this documentation revision does not rerun functional or Desktop acceptance.
+- Linux/macOS and arbitrary host builds remain untested.
+
+## 历史验证记录 / Historical validation records
+
+
 - Windows + DSH Desktop 0.2.1-rc.2: previously isolated and formally installed for exporter, comfort, and prompt-inject; bilingual metadata reader and Chinese light/dark GUI verified. Public packaging is verified separately in the private release report.
 - Linux/macOS/other DSH builds: NOT TESTED.
 - 模板以明文保存，并会传给模型；已接受请求、历史与摘要不会因切换模板撤回。工作区匹配保留路径大小写和分隔符差异，不是权限隔离。complete persona 会按宿主规则排除本插件的段。不能保证任意 Agent 预设均会注入。

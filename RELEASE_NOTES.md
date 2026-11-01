@@ -1,4 +1,14 @@
-# dsh-prompt-inject 0.1.1-rc.4
+# dsh-prompt-inject 0.1.1-rc.5
+
+[Current GitHub Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) · [使用说明 / Usage](README.md) · [Compatibility](docs/COMPATIBILITY.md)
+
+GitHub prerelease for Windows DSH Desktop RC5 compatibility, retaining named templates, global selection, workspace overrides, native ConfigForms, and H1a3x MIT attribution.
+
+当前发布状态以上述 Release 为准。下载 tgz 和同名 SHA-256 文件，核对后通过官方插件界面安装。下方保留此前版本的历史记录，不代表本轮重新验收。
+
+Use the linked Release and matching tgz/checksum. The historical notes below retain their original validation scope; this documentation-only revision does not rerun acceptance.
+
+## Historical 0.1.1-rc.4 notes
 
 The exact host and three host peer ranges omitted RC3. Add RC3 explicitly while retaining ConfigForms revision fences, data formats, injection order and original H1a3x MIT attribution.
 

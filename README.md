@@ -1,56 +1,78 @@
-# 系统提示词注入（dsh-prompt-inject）
+# 系统提示词模板 · DSH Prompt Inject
 
-## 0.1.1-rc.5 rc.5 兼容维护（2026-10-30）
+[English](README.en.md) · [下载 v0.1.1-rc.5（预发布）](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) · [兼容记录](docs/COMPATIBILITY.md)
 
-宿主范围：`0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`。仅更新经接口核对的版本声明，不改变功能、UI 或数据格式。当前验收使用隔离 Windows rc.5 Host 与浏览器；正式安装留待统一验收。以下旧版章节保留为历史记录。
+维护多套命名 System Prompt 模板，为全局或指定工作区选择一套，在下一次模型请求组装时追加到系统提示词。
 
-## 0.1.1-rc.4 兼容性维护（2026-10-25）
+这是 [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject) 的维护适配版，保留原作者版权与 MIT 许可，**不是上游官方发行**。来源与修改见 [UPSTREAM](docs/UPSTREAM.md)。
 
-宿主范围：`0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3`。本次以 Windows Desktop 0.2.1-rc.3 / Electron 44.7.0 / Node 24.21.0 实测。修复加载前版本拒绝，不新增功能。
+## 模板如何生效
 
-隔离真实宿主、三插件与 Packer 0.4.2 共存、启停、设置与重启回归已验证；用户完成真实 Desktop GUI 验收。3 项行为测试及真实 ConfigForms 保存、Workspace 覆盖、草稿刷新、冷重启与主请求单次注入检查通过。保留原 RC2 支持及自动测试；本轮完整 RC2 Desktop 复测为 NOT TESTED。具体边界见 [兼容性记录](docs/COMPATIBILITY.md)。
+- 添加、编辑、删除和预览命名模板。
+- 选择全局模板，或选择“不注入”。创建模板本身不会自动选中它。
+- 每个工作区可以跟随全局、不注入，或使用指定模板。
+- 使用宿主原生配置表单保存；冲突时保留草稿，刷新后重新检查并保存。
 
+| 全局选择 | 当前工作区选择 | 结果 |
+| --- | --- | --- |
+| 通用助手 | 跟随全局 | 使用“通用助手” |
+| 通用助手 | 不注入 | 此工作区不追加模板 |
+| 通用助手 | 代码审查 | 此工作区使用“代码审查” |
+| 不注入 | 跟随全局 | 不追加模板 |
 
-[English](README.en.md)
+这些是选择规则示例，不是内置模板。宿主的 **complete persona** 可排除此插件的提示段；不能保证任意 Agent 预设都会注入。
 
-维护命名 System Prompt 模板，支持全局默认与工作区覆盖。
+## 安装
 
-本项目是 [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject) 的本地维护适配版，保留 H1a3x 版权与 MIT 许可。不是原作者的官方发行，也不将上游代码声明为原创。参见 [来源与修改](docs/UPSTREAM.md)。
+当前包 **0.1.1-rc.5** 在 GitHub 标记为预发布。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`。当前目标为 Windows Desktop RC5；`0.2.0-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
 
-## 兼容性与状态
+1. 从 [v0.1.1-rc.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) 下载 `dsh-prompt-inject-0.1.1-rc.5.tgz` 与同名 `.sha256`。
+2. 用 `Get-FileHash -Algorithm SHA256 -LiteralPath '<tgz完整路径>'` 核对校验值。
+3. 通过 DSH 插件管理器安装本地 tgz，或使用已配置的 CLI：
 
-版本 **0.1.1-rc.5**。当前目标：Windows、DSH Desktop **0.2.1-rc.5**；保留此前 RC2 支持和自动回归，本轮 RC2 Desktop 全量复测为 NOT TESTED。其他平台未测试。
+   ```text
+   dsh plugin --profile <你的Profile> add <tgz完整路径>
+   ```
 
-模板以明文保存，并会传给模型；已接受请求、历史与摘要不会因切换模板撤回。工作区匹配保留路径大小写和分隔符差异，不是权限隔离。complete persona 会按宿主规则排除本插件的段。不能保证任意 Agent 预设均会注入。
+4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.1-rc.5`。
 
-## 安装与卸载
+模板管理依赖宿主的 settings、systemPrompt、客户端设置表单、Cordis、Schemastery 和 React 接口；精确 peer 范围见 [package.json](package.json)。不依赖另外三款 DSH 插件，不应为绕过版本检查而手改宿主依赖。
 
-在 Releases 下载与本版本对应的预构建 tgz，先核对 SHA-256，再通过 DSH 官方插件界面选择该包，或执行：
+## 第一次使用
+
+1. 打开 **设置 → 插件 → 提示词注入模板**，展开模板卡片。
+2. 点击“添加模板”，填写唯一名称与正文并保存。例如用“简洁回答”作为名称，正文写“回答时先给结论，再列必要依据。”
+3. 在“全局生效模板”选择该模板；需要例外时，在“按工作区覆盖”中单独选择。
+4. 发起下一次模型请求。是否进入最终提示词，应以最终组装或请求为准，面板预览不等于已经注入。
+
+模板以明文保存在 Profile 配置中，会进入模型请求与会话历史，fork 和备份也可能包含。请勿存放 API Key、密码或其他凭据。切换模板不会撤回已接受的请求、已有历史或压缩前缀。
+
+## 常见问题
+
+**创建并保存了模板，为什么没生效？** 检查全局选择与工作区覆盖，确认没有选“不注入”。保存只影响下一次组装；complete persona 会按宿主规则排除此段。
+
+**为什么相似的工作区路径没有共用覆盖？** 匹配会去掉末尾分隔符并保留根路径语义，但不统一路径大小写或内部斜杠形式。请以面板列出的工作区路径为准。这不是权限隔离机制。
+
+**删除选中的模板会怎样？** 使用它的全局选择会清空，显式工作区选择会变为“不注入”，不会意外改为跟随全局。
+
+**保存冲突怎么办？** 保留草稿，刷新配置，检查最新状态后再保存；不要用旧页面反复覆盖。
+
+**如何卸载？** 先备份自己需要的模板，再用插件管理器或 `dsh plugin --profile <你的Profile> remove dsh-prompt-inject`。卸载不撤回模型已收到的内容，也不保证删除保留配置或历史。
+
+## 开发与界面资料
+
+仓库直接分发 `lib/` JavaScript；`build` 为语法检查，不需要编译 UI。配置临时目录和工具缓存后运行：
 
 ```text
-dsh plugin --profile <你的Profile> add <安装包完整路径>
+npm run check
 ```
 
-重启 DSH 后，在插件管理器核对名称、ID 和版本。更新前备份自己的配置；不要手动修改 node_modules 或 app.asar。卸载使用插件管理器的卸载入口，或 `dsh plugin --profile <你的Profile> remove dsh-prompt-inject`。卸载不保证删除已导出的文件、历史或保留偏好。
+该命令执行语法检查与现有合成回归，不访问个人 Profile。历史宿主验收见[兼容记录](docs/COMPATIBILITY.md)，版本变化见 [CHANGELOG](CHANGELOG.md)。
 
-## 使用
+已有管理器卡片来自隔离 RC2 宿主，仅用于安装识别：
 
-打开插件的模板管理面板，添加命名模板、选择全局默认，并为工作区选择继承、禁用或指定模板。保存从下一次系统提示组装生效。
+![中文插件管理器卡片](assets/manager-zh.png)
 
-## 构建、测试与排错
+建议后续补充使用示例模板的管理面板截图，不展示私人 Prompt 或工作区路径。
 
-此插件直接分发 JavaScript；`npm run build` 进行语法检查，`npm test` 运行不访问个人 Profile 的合成回归。
-
-预构建 lib 已随源码保留，因此 GitHub 源码安装不需要运行安装期构建脚本。安装失败先检查 DSH 版本、Profile、包校验值和模块加载错误。不要通过关闭安全策略或覆盖宿主文件排错。完整范围见 [兼容与验证](docs/COMPATIBILITY.md)。
-
-## 许可
-
-见 [LICENSE](LICENSE)；第三方声明见对应许可文件。
-
-## Plugin manager / 插件管理器
-
-Actual isolated DSH 0.2.1-rc.2 interface, with no personal account, Profile path, or conversation content in the captured cards.
-
-![中文](assets/manager-zh.png)
-
-![English](assets/manager-en.png)
+许可见 [MIT](LICENSE)，作者与依赖说明见[第三方声明](THIRD_PARTY_NOTICES.md)及[上游记录](docs/UPSTREAM.md)。
