@@ -6,7 +6,7 @@
 
 [简体中文](README.md) · [Download v0.1.4-rc.5 (prerelease)](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) · [Compatibility](docs/COMPATIBILITY.md)
 
-Manage named System Prompt templates. Select one globally or per workspace to append it when the next model request is assembled.
+Manage named System Prompt templates, a default, workspace overrides and direct per-Agent mode choices. Dynamic preset discovery and automatic saves keep assignments clear.
 
 A maintained adaptation of [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject), retaining the original copyright and MIT license. **This is not an official upstream release.** See [upstream and changes](docs/UPSTREAM.md).
 
@@ -14,8 +14,12 @@ A maintained adaptation of [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/ds
 
 - Add, edit, delete, and preview named templates.
 - Select a global template or No injection. Creating a template does not select it automatically.
-- Let each workspace inherit the global choice, disable injection, or select its own template.
+- Let each workspace inherit the default, skip injection, or select a template in advanced settings.
+- Assign Default, No injection or a named template directly to each dynamically discovered Agent mode.
+- Dropdowns save automatically with saving, saved and conflict feedback.
 - Save through native host configuration forms. Conflicts retain your draft so you can refresh, review, and retry.
+
+These inheritance examples apply when a mode follows the default; explicit mode templates or No injection take priority.
 
 | Global choice | Workspace choice | Result |
 | --- | --- | --- |
@@ -28,9 +32,9 @@ These names illustrate selection rules; they are not built-in templates. A host 
 
 ## Installation
 
-Local candidate: **0.1.4-rc.5**, not pushed or published. The maintenance suffix follows the RC5 host target; the previous GitHub prerelease remains 0.1.1-rc.5. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Windows Desktop RC5 is the current target. The legacy `0.2.0-rc.2` declaration is retained, not newly certified. Other platforms are untested.
+Current version: **0.1.4-rc.5**. The maintenance suffix follows the RC5 host target. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Windows Desktop RC5 is the current target. The legacy `0.2.0-rc.2` declaration is retained, not newly certified. Other platforms are untested.
 
-1. Use the locally delivered `dsh-prompt-inject-0.1.4-rc.5.tgz` and its `.sha256`. The GitHub link above still points to the previous release.
+1. Download `dsh-prompt-inject-0.1.4-rc.5.tgz` and its `.sha256` from the [v0.1.4-rc.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5).
 2. Compare the checksum using `Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'`.
 3. Install the local tgz through DSH's plugin manager or a configured CLI:
 
@@ -46,7 +50,7 @@ Template management requires host settings, systemPrompt, client configuration f
 
 1. Open **Settings → System Prompt Injection** to enter the full page directly.
 2. Add a unique name and prompt text, then save. For example, name it “Concise answers” with text “Start with the conclusion, then give the necessary supporting details.”
-3. Select it under Global default template. Set per-workspace exceptions as needed.
+3. Select it under Default template. Set per-workspace exceptions as needed.
 4. Choose the global default or a workspace as the preview target in Current configuration. Expected injection preview shows the saved configuration result and text; it does not guess the current chat workspace.
 5. Send the next model request. Check the final assembled prompt or request to confirm injection; panel preview alone does not prove it.
 
@@ -74,11 +78,12 @@ npm run check
 
 This checks syntax and existing synthetic regressions without accessing your personal Profile. See [historical host validation](docs/COMPATIBILITY.md) and [changelog](CHANGELOG.md).
 
-This existing manager card comes from an isolated RC2 host and identifies the installation:
+Actual Windows RC5 Web settings renderer with example configuration; no private prompts or workspace paths. Example preset declarations do not imply bundled RP functionality.
 
-![English plugin manager card](assets/manager-en.png)
+![Template management and default](assets/settings-en.png)
 
-Suggested addition: a template-management screenshot using example text, with private prompts and workspace paths excluded.
+![Per-Agent mode template choices](assets/settings-en-modes.png)
+
 
 See [MIT license](LICENSE), [third-party notices](THIRD_PARTY_NOTICES.md), and [upstream record](docs/UPSTREAM.md).
 

@@ -26,7 +26,7 @@ The public host roster supplies IDs and names. Shipped names use the host settin
 - Actual host registration, disposal, re-registration and renamed display metadata preserved ID mappings. Reopening settings after an actual new registration synchronized the list and restored its saved choice. The test bridge exists only in the copied offline test provider and is excluded from the public package.
 - Official complete Persona excluded all Prompt Inject text. Cold restart retained migrated maps, legacy fields, templates and workspaces. Actual English names/rows and Chinese 1100/900/640 responsive layouts passed with no page errors or horizontal overflow.
 
-All prompts were synthetic and no external model request was sent. RP IDs in the fixture are not certification of the RP plugin itself. Old accepted request/history/summary content is not retracted. No new RC2/RC3 or other-platform certification. Native user approval, formal installation and publication are separate pending gates.
+All prompts were synthetic and no external model request was sent. RP IDs in the fixture are not certification of the RP plugin itself. Old accepted request/history/summary content is not retracted. No new RC2/RC3 or other-platform certification. Final native UI was approved by the user; official formal installation and cold-start checks passed. No private model request was sent. Publication is recorded in the Release.
 
 ## Final visual polish
 

@@ -6,7 +6,7 @@
 - Safely migrate previous candidate exclusions during the next revision-fenced save, preserving templates, workspaces, legacy fields and unknown-ID mappings.
 - Retain localized row-based settings, explicit save feedback, advanced workspace overrides and collapsed diagnostics. Synchronize the live roster on reopening, reconnect, refresh and host preset-settings notifications.
 - Final visual polish: compact ~48 px rows, narrower native selects, follow-default labels and full-name hover text; no functional changes.
-- Validation: 21 tests; actual RC5 offline request captures, atomic migration/conflicts, registry add/remove/re-registration/renaming, deletion/recreation, preset switching, cold persistence, Chinese/English and responsive layout. Native confirmation and formal installation/publication remain separate gates.
+- Validation: 21 tests; actual RC5 offline request captures, atomic migration/conflicts, registry add/remove/re-registration/renaming, deletion/recreation, preset switching, cold persistence, Chinese/English and responsive layout. Final native UI was user-approved; official installation and formal cold-start verification passed.
 
 ## 0.1.3-rc.5 — 2026-11-01
 

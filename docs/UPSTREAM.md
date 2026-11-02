@@ -1,6 +1,6 @@
 # Upstream and local adaptation
 
-Current candidate: **0.1.4-rc.5** (not published); previous GitHub prerelease: **0.1.1-rc.5**. Current host/peer scope is documented in [compatibility](COMPATIBILITY.md); the adaptation lineage below is historical.
+Current maintained version: **0.1.4-rc.5**. Current host/peer scope is documented in [compatibility](COMPATIBILITY.md); the adaptation lineage below is historical.
 
 Upstream: https://github.com/H1a3x/dsh-prompt-inject
 
@@ -14,7 +14,7 @@ The 0.1.2-rc.5 maintenance changes the settings entry and information layout, ad
 
 The 0.1.3-rc.5 maintenance changes only settings spacing and presentational classes. Upstream attribution and license remain unchanged.
 
-The 0.1.4-rc.5 maintenance by 379385796-sys carries forward the accepted RC5 adaptation and UI, then adds per-Agent three-state template selection, safe legacy-exclusion migration, localized live-roster row settings and targeted request-boundary validation. Earlier unshipped candidates explored exclusions and cards; only the final 0.1.4-rc.5 will be published. H1a3x remains the original author.
+The 0.1.4-rc.5 maintenance by 379385796-sys carries forward the accepted RC5 adaptation and UI, then adds per-Agent three-state template selection, safe legacy-exclusion migration, localized live-roster row settings and targeted request-boundary validation. Earlier unshipped candidates explored exclusions and cards; only the final 0.1.4-rc.5 is published. H1a3x remains the original author.
 
 ## Continuing maintenance and contribution attribution
 
