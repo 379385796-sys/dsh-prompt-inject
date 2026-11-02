@@ -1,7 +1,7 @@
 {
   "name": "dsh-prompt-inject",
-  "version": "0.1.1-rc.5",
-  "description": "System-prompt template injection for DeepSeek Harness: manage named prompt templates and inject the selected one (global default plus per-workspace overrides) into every session's system prompt.",
+  "version": "0.1.4-rc.5",
+  "description": "System-prompt templates for DeepSeek Harness: default and workspace selection plus per-Agent Preset default, no-injection, or explicit template choices.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -23,7 +23,8 @@
     "LICENSE",
     "THIRD_PARTY_NOTICES.md",
     "docs/UPSTREAM.md",
-    "assets"
+    "assets",
+    "docs/PRESET-EXCLUSION.md"
   ],
   "dsh": {
     "bundle": {
@@ -71,10 +72,16 @@
     "@deepseek-ai/dsh-client-ui-settings": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5"
   },
   "scripts": {
-    "build": "node --check lib/index.js && node --check lib/client.js",
+    "build": "node scripts/sync-client-resolver.mjs --check && node --check lib/selection.js && node --check lib/index.js && node --check lib/client.js",
     "check": "npm run build && npm test",
     "test": "node --test tests/*.test.mjs",
     "pack:release": "node scripts/pack-release.mjs"
   },
-  "icon": "./icon.svg"
+  "icon": "./icon.svg",
+  "contributors": [
+    {
+      "name": "379385796-sys",
+      "url": "https://github.com/379385796-sys"
+    }
+  ]
 }

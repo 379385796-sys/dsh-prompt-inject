@@ -1,0 +1,7 @@
+# Keep these frozen distribution files byte-identical to the accepted tgz.
+LICENSE -text
+locale/*.json -text
+CHANGELOG.md -text
+THIRD_PARTY_NOTICES.md -text
+icon.svg -text
+cordis.patch.yml -text

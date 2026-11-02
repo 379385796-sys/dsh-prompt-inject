@@ -35,3 +35,22 @@ Three behavior tests and real ConfigForms saving, workspace overrides, draft ref
 Target: DSH Desktop 0.2.1-rc.5, Windows x64, Electron 44.7.0 / Node 24.21.0 / ABI 149. Exact host range: `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Add RC5 to the three actually used host peer ranges. Preserve ConfigForms revision fences, volatile Profile settings, workspace selection, injection order and H1a3x MIT attribution. No functional code changes.
 
 Core behavior is checked on an isolated rc.5 Host/browser with synthetic sessions and deterministic offline model output, followed by three-plugin coexistence and the unchanged Packer 0.4.3 candidate dependency precheck. Earlier RC2/RC3 evidence remains; those full Desktop GUI checks are not repeated here. No formal Profile or DSH core modification.
+
+
+## 0.1.2-rc.5 — 2026-11-01
+
+Target: Windows x64 / DSH Desktop 0.2.1-rc.5, Electron 44.7.0 / Node 24.21.0. Existing engine and peer ranges are unchanged; earlier hosts/platforms are not newly certified by these UI changes.
+
+The user confirmed real isolated Desktop navigation after Agent presets, absence of the old entry, direct layout, Chinese/English switching and a saved synthetic template after cold restart. Automated native Desktop control was blocked by tool policy; this human acceptance is recorded separately from Headless Edge over the real RC5 Host.
+
+Real ConfigForms CRUD, global/workspace selection, expected preview, revision conflict, failed refresh and actual WebSocket reconnect retained drafts. The real Host cold restart preserved configuration. Actual offline LLM adapter captures verified global injection exactly once, replacement by workspace selection, no injection, live edits in the same session, and exclusion by the official dsh-persona component with complete=true. These are request-boundary observations, not UI preview assertions. Public 13-test regression and resolver repeatability checks remain separate evidence.
+
+Comfort 1.0.3, AI Exporter 0.1.3 and Packer 0.4.3 were loaded together for targeted coexistence only. Broad Packer backup/restore and cross-plugin regression remain deferred to the joint regression. No formal installation is implied by this acceptance record.
+
+## 0.1.3-rc.5 — spacing maintenance (2026-11-01)
+
+Windows x64 / DSH Desktop 0.2.1-rc.5. CSS and two presentational class changes only; functional code byte-identical to 0.1.2-rc.5 after removing those changes. Existing 13 tests passed once, native Desktop accepted by the user, actual RC5 Web renderer passed at 1360/900/640 pixels. Host ranges, dependencies, configuration and injection semantics are unchanged.
+
+## 0.1.4-rc.5 — Per-Agent template selection
+
+Target remains Windows x64 / DSH Desktop 0.2.1-rc.5. This is a local configuration/selection/UI change, not a new host compatibility project. Current identity uses `sessionProjections.stateOf(session, "agentPreset")`. All-default settings preserve workspace/global behavior; explicit mappings need a reliable current ID. No new certification of RC2/RC3 or other platforms. Actual test scope and migration are recorded in [PRESET-EXCLUSION](PRESET-EXCLUSION.md), whose existing filename is retained. Native approval and formal installation are still pending.

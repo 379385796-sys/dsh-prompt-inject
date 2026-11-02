@@ -1,6 +1,10 @@
-# DSH Prompt Inject
+# System Prompt Injection · DSH Prompt Inject
 
-[简体中文](README.md) · [Download v0.1.1-rc.5 (prerelease)](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) · [Compatibility](docs/COMPATIBILITY.md)
+**Original Author:** [H1a3x](https://github.com/H1a3x)
+
+**Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
+
+[简体中文](README.md) · [Download v0.1.4-rc.5 (prerelease)](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) · [Compatibility](docs/COMPATIBILITY.md)
 
 Manage named System Prompt templates. Select one globally or per workspace to append it when the next model request is assembled.
 
@@ -24,9 +28,9 @@ These names illustrate selection rules; they are not built-in templates. A host 
 
 ## Installation
 
-Current package: **0.1.1-rc.5**, marked as a GitHub prerelease. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Windows Desktop RC5 is the current target. The legacy `0.2.0-rc.2` declaration is retained, not newly certified. Other platforms are untested.
+Local candidate: **0.1.4-rc.5**, not pushed or published. The maintenance suffix follows the RC5 host target; the previous GitHub prerelease remains 0.1.1-rc.5. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Windows Desktop RC5 is the current target. The legacy `0.2.0-rc.2` declaration is retained, not newly certified. Other platforms are untested.
 
-1. Download `dsh-prompt-inject-0.1.1-rc.5.tgz` and its `.sha256` from [v0.1.1-rc.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5).
+1. Use the locally delivered `dsh-prompt-inject-0.1.4-rc.5.tgz` and its `.sha256`. The GitHub link above still points to the previous release.
 2. Compare the checksum using `Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'`.
 3. Install the local tgz through DSH's plugin manager or a configured CLI:
 
@@ -34,16 +38,17 @@ Current package: **0.1.1-rc.5**, marked as a GitHub prerelease. Requires Node **
    dsh plugin --profile <profile> add <absolute-tgz-path>
    ```
 
-4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.1-rc.5`.
+4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.4-rc.5`.
 
 Template management requires host settings, systemPrompt, client configuration forms, Cordis, Schemastery, and React interfaces. Exact peer ranges are in [package.json](package.json). The other three DSH plugins are not required. Do not edit host dependencies to bypass compatibility checks.
 
 ## First use
 
-1. Open **Settings → Plugins → Prompt Template Injection** and expand the card.
+1. Open **Settings → System Prompt Injection** to enter the full page directly.
 2. Add a unique name and prompt text, then save. For example, name it “Concise answers” with text “Start with the conclusion, then give the necessary supporting details.”
-3. Select it under Global active template. Set per-workspace exceptions as needed.
-4. Send the next model request. Check the final assembled prompt or request to confirm injection; panel preview alone does not prove it.
+3. Select it under Global default template. Set per-workspace exceptions as needed.
+4. Choose the global default or a workspace as the preview target in Current configuration. Expected injection preview shows the saved configuration result and text; it does not guess the current chat workspace.
+5. Send the next model request. Check the final assembled prompt or request to confirm injection; panel preview alone does not prove it.
 
 Templates are plaintext in the Profile configuration and enter model requests and session history; forks and backups may include them. Do not store credentials. Switching templates does not retract accepted requests, existing history, or compaction prefixes.
 
@@ -61,7 +66,7 @@ Templates are plaintext in the Profile configuration and enter model requests an
 
 ## Development and interface
 
-The repository ships `lib/` JavaScript directly; build performs syntax checks without UI compilation. Configure temporary directories and tool caches, then run:
+The repository ships `lib/` JavaScript directly; build checks the shared browser resolver and syntax without UI compilation. After changing `lib/selection.js`, run `node scripts/sync-client-resolver.mjs`; build rejects a stale browser copy. Configure temporary directories and tool caches, then run:
 
 ```text
 npm run check
@@ -76,3 +81,21 @@ This existing manager card comes from an isolated RC2 host and identifies the in
 Suggested addition: a template-management screenshot using example text, with private prompts and workspace paths excluded.
 
 See [MIT license](LICENSE), [third-party notices](THIRD_PARTY_NOTICES.md), and [upstream record](docs/UPSTREAM.md).
+
+## Agent modes and prompts
+
+Open Settings → System Prompt Injection. Keep your template library, choose a default template, then select directly beside each registered Agent mode:
+
+- **Follow default · template name** inherits the workspace override, then the default template.
+- **No injection** appends no Prompt Inject template for this mode.
+- **A named template** takes priority over workspace/default selection.
+
+Dropdowns save automatically with saving, saved and error feedback. Advanced workspace settings and diagnostics remain in a disclosure. Deleted or invalid template references stay unresolved and inject nothing; they never silently inherit another template. Existing immutable unique template names remain the reference keys.
+
+Rows come from the host roster, using official built-in localized names or published third-party names, with secondary IDs. Reopen, reconnect and explicit refresh synchronize the roster; host preset-settings notifications also refresh it. RC5 has no universal event for every plugin registration change, so instant updates are not claimed. New rows inherit defaults. Removed rows disappear while their ID mappings remain, ready for re-registration or display-name changes.
+
+Legacy enabled exclusions migrate to No injection; a disabled legacy switch ignores the old list. Migration is deterministic and commits the version and mapping atomically with the next normal revision-fenced save. Existing new mappings win. Templates, workspaces and legacy fields are preserved; startup does not rewrite configuration.
+
+The current mode comes from RC5's public session projection, not its immutable creation header. Explicit mappings require a reliable current ID; all-default configurations retain prior selection behavior. Host Complete Persona still owns the sole final prompt. RP rules, cards, world books and memory belong to RP plugins. History, summaries and accepted requests are not retracted.
+
+See [compatibility](docs/COMPATIBILITY.md) for actual Windows x64 / DSH Desktop 0.2.1-rc.5 validation.

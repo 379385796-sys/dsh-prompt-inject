@@ -1,6 +1,10 @@
-# 系统提示词模板 · DSH Prompt Inject
+# 系统提示词注入 · DSH Prompt Inject
 
-[English](README.en.md) · [下载 v0.1.1-rc.5（预发布）](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) · [兼容记录](docs/COMPATIBILITY.md)
+**Original Author:** [H1a3x](https://github.com/H1a3x)
+
+**Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
+
+[English](README.en.md) · [下载 v0.1.4-rc.5（预发布）](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) · [兼容记录](docs/COMPATIBILITY.md)
 
 维护多套命名 System Prompt 模板，为全局或指定工作区选择一套，在下一次模型请求组装时追加到系统提示词。
 
@@ -24,9 +28,9 @@
 
 ## 安装
 
-当前包 **0.1.1-rc.5** 在 GitHub 标记为预发布。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`。当前目标为 Windows Desktop RC5；`0.2.0-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
+当前本地候选为 **0.1.4-rc.5**，尚未推送或发布；后缀按维护版约定对应 RC5 宿主。此前 GitHub 预发布版仍为 0.1.1-rc.5。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`。当前目标为 Windows Desktop RC5；`0.2.0-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
 
-1. 从 [v0.1.1-rc.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5) 下载 `dsh-prompt-inject-0.1.1-rc.5.tgz` 与同名 `.sha256`。
+1. 使用本轮本地交付的 `dsh-prompt-inject-0.1.4-rc.5.tgz` 与同名 `.sha256`；上述 GitHub 链接仍指向此前发布版。
 2. 用 `Get-FileHash -Algorithm SHA256 -LiteralPath '<tgz完整路径>'` 核对校验值。
 3. 通过 DSH 插件管理器安装本地 tgz，或使用已配置的 CLI：
 
@@ -34,16 +38,17 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.1-rc.5`。
+4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.4-rc.5`。
 
 模板管理依赖宿主的 settings、systemPrompt、客户端设置表单、Cordis、Schemastery 和 React 接口；精确 peer 范围见 [package.json](package.json)。不依赖另外三款 DSH 插件，不应为绕过版本检查而手改宿主依赖。
 
 ## 第一次使用
 
-1. 打开 **设置 → 插件 → 提示词注入模板**，展开模板卡片。
+1. 打开 **设置 → 系统提示词注入**，直接进入完整管理页面。
 2. 点击“添加模板”，填写唯一名称与正文并保存。例如用“简洁回答”作为名称，正文写“回答时先给结论，再列必要依据。”
-3. 在“全局生效模板”选择该模板；需要例外时，在“按工作区覆盖”中单独选择。
-4. 发起下一次模型请求。是否进入最终提示词，应以最终组装或请求为准，面板预览不等于已经注入。
+3. 在“全局默认模板”选择该模板；需要例外时，在“按工作区覆盖”中单独选择。
+4. 在“当前配置概览”选择全局或工作区作为预览对象；下方“预计注入预览”显示已保存配置的解析结果与正文，不自动猜测当前聊天工作区。
+5. 发起下一次模型请求。是否进入最终提示词，应以最终组装或请求为准，面板预览不等于已经注入。
 
 模板以明文保存在 Profile 配置中，会进入模型请求与会话历史，fork 和备份也可能包含。请勿存放 API Key、密码或其他凭据。切换模板不会撤回已接受的请求、已有历史或压缩前缀。
 
@@ -61,7 +66,7 @@
 
 ## 开发与界面资料
 
-仓库直接分发 `lib/` JavaScript；`build` 为语法检查，不需要编译 UI。配置临时目录和工具缓存后运行：
+仓库直接分发 `lib/` JavaScript；`build` 检查共享解析器的浏览器副本与语法，不需要编译 UI。修改 `lib/selection.js` 后先运行 `node scripts/sync-client-resolver.mjs`，构建会拒绝不同步的副本。配置临时目录和工具缓存后运行：
 
 ```text
 npm run check
@@ -76,3 +81,21 @@ npm run check
 建议后续补充使用示例模板的管理面板截图，不展示私人 Prompt 或工作区路径。
 
 许可见 [MIT](LICENSE)，作者与依赖说明见[第三方声明](THIRD_PARTY_NOTICES.md)及[上游记录](docs/UPSTREAM.md)。
+
+## Agent 模式与提示词
+
+设置 → 系统提示词注入：保留模板库，选择一份默认模板，然后在每种 Agent 模式右侧直接选择：
+
+- **跟随默认 · 模板名称**：继承工作区覆盖；没有覆盖时使用默认模板。
+- **不注入**：该模式不追加 Prompt Inject 模板。
+- **具体模板**：使用库中指定模板，优先于工作区和默认模板。
+
+每次下拉选择自动保存，界面明确显示保存中、已保存或错误。工作区覆盖和配置诊断在折叠区保留。指定模板被删除或失效时显示未解析并停止注入，不回退到其他模板。模板名称是现有不可编辑的唯一引用键，没有新增另一套模板 ID。
+
+模式列表来自当前宿主注册项；使用官方内置本地化名称和第三方注册名，ID 为辅助信息。重新打开设置、重连或刷新会同步列表，并响应宿主预设设置更新通知。没有覆盖所有插件注册变化的可靠统一事件，因此不声称所有变更都会无条件即时推送。新增项默认继承；暂时消失的 ID 不显示为可用项，其映射仍保留，重新注册同 ID 后恢复。
+
+旧候选的排除配置会安全迁移：旧开关开启时已排除项变为“不注入”，关闭时忽略旧名单。迁移是确定性的；下一次正常保存将映射与格式版本原子提交，冲突时不提交。模板正文、工作区覆盖及旧字段保留，已保存的新映射优先，不在启动时后台改写配置。
+
+当前模式使用 RC5 的公开会话投影识别，不使用冻结的创建 header。有显式映射却无法确定当前 ID 时停止组装；全部继承默认时保留原选择逻辑。Complete Persona 仍按宿主规则成为唯一最终提示词。Prompt Inject 不加载 RP 总则、角色卡、世界书或记忆。切换设置不撤回历史、摘要或在途请求。
+
+Windows x64 / DSH Desktop 0.2.1-rc.5 的实际验证范围见[兼容记录](docs/COMPATIBILITY.md)。
