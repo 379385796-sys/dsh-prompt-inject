@@ -2,11 +2,40 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.1-rc.5** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`; Node **24+**.
-- Current published target: Windows x64 DSH Desktop **0.2.1-rc.5**. See [v0.1.1-rc.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.1-rc.5). Source baseline: `ea9e49ce04fe9ce14ca52f877055529c95d3b827`.
-- 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3 测试数量与安装状态是对应日期的历史记录；本轮仅检查文档，没有重新运行功能或桌面验收。
-- Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3 records below retain their dates and scope; this documentation revision does not rerun functional or Desktop acceptance.
+- Package **0.1.5** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **24+**.
+- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5).
+- 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
+- Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.5 — 0.2.2-rc.1 compatibility (2026-11-05)
+
+Target: DSH Desktop 0.2.2-rc.1, Windows x64, Electron 44 / Node 24.21.0. Exact host range: `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`.
+
+0.2.2-rc.1 evaluates `engines.dsh` before importing plugin code and skips a bundle whose range does not satisfy the running host, so 0.1.4-rc.5 could not load at all on that host.
+
+### Reviewed surfaces
+
+| Surface | 0.2.1-rc.5 | 0.2.2-rc.1 | Effect |
+| --- | --- | --- | --- |
+| `systemPrompt.variable()` / `.section()` | unchanged | unchanged | injection contract intact |
+| `system-prompt/assemble` payload | `PromptAssembly` (with `tools`) | `PromptPresentation` (tools provider-owned) | not used by this plugin |
+| `sessionProjections.stateOf(session, key)` | public | **deprecated**, still returns the value | prefer the owning service |
+| `agentPresets.presetForSession(session)` | present | present | preferred lookup |
+| `settings.configure({auto}, fiber)` | `owner` used directly | reads `owner.ctx.fiber` | unchanged for `ctx.fiber` callers |
+| cordis | 4.0.5 | 4.1.0 | volatile config, `effect`, `inject` unchanged |
+
+### Behaviour
+
+The preset lookup now tries `agentPresets.presetForSession(session)` first and falls back to the deprecated projection read. Both return the same preset id; the "current Agent Preset unavailable" error still throws rather than injecting the wrong template. Section name, order 50, the single `{{dsh_prompt_inject_text}}` variable and the Complete Persona precedence are unchanged.
+
+### Evidence
+
+- Real 0.2.2-rc.1 host: template text appears exactly once in the assembled system prompt (5738 → 5813 characters).
+- Preset `standard` set to `none`: marker count 0, prompt back to 5738 characters.
+- Configuration survived a host restart and still injected once.
+- No deprecation warning in the host log; no plugin load warnings.
+- 22 automated tests pass.
 
 ## 历史验证记录 / Historical validation records
 

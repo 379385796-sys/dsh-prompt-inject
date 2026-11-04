@@ -1,17 +1,31 @@
-# dsh-prompt-inject 0.1.4-rc.5
+# dsh-prompt-inject 0.1.5
 
-Direct per-Agent template assignment: follow workspace/default selection, inject no template, or select a named template. Includes dynamic host preset discovery, official localized built-in names, automatic revision-checked saves, safe migration from earlier candidate exclusions, and compact native-select settings.
+DSH Desktop **0.2.2-rc.1** compatibility release. 0.2.2-rc.1 refuses to load a plugin whose `engines.dsh` does not name the running host, so 0.1.4-rc.5 was skipped at boot on that host. Injection behaviour, the three-state per-Preset model, settings UI and stored configuration are unchanged.
+
+DSH Desktop **0.2.2-rc.1** 兼容性发布。该宿主会跳过 `engines.dsh` 未声明当前版本的插件，0.1.4-rc.5 因此无法加载。注入行为、每个 Agent Preset 的三态选择、设置界面与已保存配置均未改动。
 
 Original Author: H1a3x. Current Maintainer: 379385796-sys. Original MIT license/copyright retained; maintenance contributions separately attributed.
 
-Validated on Windows x64 / DSH Desktop 0.2.1-rc.5: 21 tests, real isolated offline request captures, migration/conflicts, registry lifecycle, preset switching, template deletion/recreation, Complete Persona, Chinese/English and responsive layout. The user accepted the final native UI. Official upgrade from 0.1.3-rc.5 preserved templates/workspaces and unrelated plugins; formal cold-start settings/roster/UI and installed-module in-memory assembly checks passed. Private prompts were not sent to a model. Other platforms and new RC2/RC3 feature compatibility are not certified.
+## What changed
 
-The accepted final-style installation archive is preserved unchanged. All 19 files match the frozen source commit below. The main branch additionally carries current homepage screenshots and final documentation; executable code is unchanged.
+- `engines.dsh` and the `@deepseek-ai/dsh-*` peer ranges now include `0.2.2-rc.1`.
+- The preset lookup prefers the owning service `agentPresets.presetForSession(session)` when the host exposes it, and falls back to `sessionProjections.stateOf(session, 'agentPreset')` on older hosts. 0.2.2 deprecates the generic projection read; both paths return the same value, and the "current Agent Preset unavailable" failure still throws instead of injecting the wrong template.
+- No change to templates, workspace overrides, migration, ordering (section order 50) or the single `{{dsh_prompt_inject_text}}` section contract.
 
-- Frozen source / release tag target: 54c6f3b6ff0f8a3f3eba2b7fdb6c8d398de3aa32
-- SHA-256: e2fc10412fbe7d8604fdb6d4b1f0fd7a967dc1b73c1b1a7999f593970d38cff6
-- Asset: dsh-prompt-inject-0.1.4-rc.5.tgz
+## Verification on 0.2.2-rc.1
 
-Template changes do not retract history, summaries or accepted requests. Complete Persona remains authoritative. RP behavior belongs to RP plugins. Missing explicit references fail closed. Preset registration changes synchronize on reopening, reconnect and refresh, plus host preset-settings notifications; universal instant push is not claimed.
+- Template text appears **exactly once** in the assembled system prompt of a real session (system prompt 5738 → 5813 characters).
+- With the `standard` preset set to `none`, the marker disappears and the prompt returns to 5738 characters — the preset-exclusion path that exercises the new lookup.
+- Configuration persisted across a host restart and still injected once.
+- No `sessionProjections.stateOf ... is deprecated` warning in the host log.
+- 22 tests pass (1 new for the preferred service path, 1 adjusted to keep the legacy fallback covered).
 
-This closes the 0.1.4-rc.5 development scope only. The project remains open to normal maintenance and future independently versioned improvements.
+## Install
+
+Download `dsh-prompt-inject-0.1.5.tgz`, verify it against `dsh-prompt-inject-0.1.5.tgz.sha256`, then install through the official plugin interface. Node 24+.
+
+Template changes do not retract history, summaries or accepted requests. Complete Persona remains authoritative. Missing explicit references fail closed.
+
+## Historical 0.1.4-rc.5 notes
+
+Direct per-Agent template assignment with dynamic host preset discovery, localized built-in names, revision-checked saves, safe migration from earlier candidate exclusions and compact native-select settings. Validated on Windows x64 / DSH Desktop 0.2.1-rc.5 with 21 tests; official upgrade preserved templates, workspaces and unrelated plugins.

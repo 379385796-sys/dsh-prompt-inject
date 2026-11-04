@@ -4,7 +4,7 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[简体中文](README.md) · [Download v0.1.4-rc.5 (prerelease)](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) · [Compatibility](docs/COMPATIBILITY.md)
+[简体中文](README.md) · [Download v0.1.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) · [Compatibility](docs/COMPATIBILITY.md)
 
 Manage named System Prompt templates, a default, workspace overrides and direct per-Agent mode choices. Dynamic preset discovery and automatic saves keep assignments clear.
 
@@ -32,9 +32,9 @@ These names illustrate selection rules; they are not built-in templates. A host 
 
 ## Installation
 
-Current version: **0.1.4-rc.5**. The maintenance suffix follows the RC5 host target. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Windows Desktop RC5 is the current target. The legacy `0.2.0-rc.2` declaration is retained, not newly certified. Other platforms are untested.
+Current version: **0.1.5**. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`. Windows Desktop **0.2.2-rc.1** is the current target; the `0.2.0-rc.2` and `0.2.1-rc.2` declarations are retained, not newly certified. Other platforms are untested.
 
-1. Download `dsh-prompt-inject-0.1.4-rc.5.tgz` and its `.sha256` from the [v0.1.4-rc.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5).
+1. Download `dsh-prompt-inject-0.1.5.tgz` and its `.sha256` from the [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5).
 2. Compare the checksum using `Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'`.
 3. Install the local tgz through DSH's plugin manager or a configured CLI:
 
@@ -42,7 +42,7 @@ Current version: **0.1.4-rc.5**. The maintenance suffix follows the RC5 host tar
    dsh plugin --profile <profile> add <absolute-tgz-path>
    ```
 
-4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.4-rc.5`.
+4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.5`.
 
 Template management requires host settings, systemPrompt, client configuration forms, Cordis, Schemastery, and React interfaces. Exact peer ranges are in [package.json](package.json). The other three DSH plugins are not required. Do not edit host dependencies to bypass compatibility checks.
 
@@ -103,4 +103,4 @@ Legacy enabled exclusions migrate to No injection; a disabled legacy switch igno
 
 The current mode comes from RC5's public session projection, not its immutable creation header. Explicit mappings require a reliable current ID; all-default configurations retain prior selection behavior. Host Complete Persona still owns the sole final prompt. RP rules, cards, world books and memory belong to RP plugins. History, summaries and accepted requests are not retracted.
 
-See [compatibility](docs/COMPATIBILITY.md) for actual Windows x64 / DSH Desktop 0.2.1-rc.5 validation.
+See [compatibility](docs/COMPATIBILITY.md) for actual Windows x64 / DSH Desktop 0.2.2-rc.1 validation.

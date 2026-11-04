@@ -1,3 +1,11 @@
+## 0.1.5 — 2026-11-05
+
+- Add DSH Desktop **0.2.2-rc.1** to the verified host range; earlier declarations retained.
+- 0.2.2-rc.1 refuses to load a plugin whose `engines.dsh` does not name the running host, so 0.1.4-rc.5 was skipped at boot on that host. The `engines.dsh` and `@deepseek-ai/dsh-*` peer ranges now name 0.2.2-rc.1.
+- Prefer the owning preset service (`agentPresets.presetForSession`) when present and fall back to the still-working `sessionProjections.stateOf(session, 'agentPreset')` on older hosts. 0.2.2 deprecates the generic projection read; behaviour, failure semantics and the "preset unavailable" error are unchanged.
+- Verified on the real 0.2.2-rc.1 host: template text injected exactly once into the assembled system prompt, preset exclusion suppressing it, configuration surviving a restart, and no deprecation warning emitted.
+- Validation: 22 tests (1 new for the preferred service path, 1 adjusted to cover the legacy fallback).
+
 ## 0.1.4-rc.5 — 2026-11-02
 
 - Current Maintainer: 379385796-sys. Original Author: H1a3x. Original MIT license/copyright retained; maintenance contributions separately attributed.

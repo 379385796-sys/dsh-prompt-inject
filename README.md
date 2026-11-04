@@ -4,7 +4,7 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[English](README.en.md) · [下载 v0.1.4-rc.5（预发布）](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) · [兼容记录](docs/COMPATIBILITY.md)
+[English](README.en.md) · [下载 v0.1.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) · [兼容记录](docs/COMPATIBILITY.md)
 
 管理命名 System Prompt 模板，为每种 Agent 模式直接选择跟随默认、不注入或指定模板，支持工作区覆盖、动态预设识别与自动保存。
 
@@ -32,9 +32,9 @@
 
 ## 安装
 
-当前版本为 **0.1.4-rc.5**。维护版后缀对应 RC5 宿主。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`。当前目标为 Windows Desktop RC5；`0.2.0-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
+当前版本为 **0.1.5**。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`。当前目标为 Windows Desktop **0.2.2-rc.1**；`0.2.0-rc.2` 与 `0.2.1-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
 
-1. 从 [v0.1.4-rc.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.4-rc.5) 下载 `dsh-prompt-inject-0.1.4-rc.5.tgz` 与同名 `.sha256`。
+1. 从 [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) 下载 `dsh-prompt-inject-0.1.5.tgz` 与同名 `.sha256`。
 2. 用 `Get-FileHash -Algorithm SHA256 -LiteralPath '<tgz完整路径>'` 核对校验值。
 3. 通过 DSH 插件管理器安装本地 tgz，或使用已配置的 CLI：
 
@@ -42,7 +42,7 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.4-rc.5`。
+4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.5`。
 
 模板管理依赖宿主的 settings、systemPrompt、客户端设置表单、Cordis、Schemastery 和 React 接口；精确 peer 范围见 [package.json](package.json)。不依赖另外三款 DSH 插件，不应为绕过版本检查而手改宿主依赖。
 
@@ -102,4 +102,4 @@ npm run check
 
 当前模式使用 RC5 的公开会话投影识别，不使用冻结的创建 header。有显式映射却无法确定当前 ID 时停止组装；全部继承默认时保留原选择逻辑。Complete Persona 仍按宿主规则成为唯一最终提示词。Prompt Inject 不加载 RP 总则、角色卡、世界书或记忆。切换设置不撤回历史、摘要或在途请求。
 
-Windows x64 / DSH Desktop 0.2.1-rc.5 的实际验证范围见[兼容记录](docs/COMPATIBILITY.md)。
+Windows x64 / DSH Desktop 0.2.2-rc.1 的实际验证范围见[兼容记录](docs/COMPATIBILITY.md)。

@@ -29,6 +29,7 @@ test('Host reads live edited text on the next assembly and preserves the single 
 test('current preset exclusion precedes workspace selection and is local to each assembly',()=>{
   let enabled=true,ids=['roleplay','character-forge'],read
   const current=new Map(),ctx={effect:fn=>fn(),settings:{configure:()=>()=>{}},get:key=>{
+    if(key==='agentPresets')return undefined
     assert.equal(key,'sessionProjections');return {stateOf:(session,key)=>{assert.equal(key,'agentPreset');return current.get(session)}}
   },systemPrompt:{variable:(_,fn)=>{read=fn},section:()=>{}}}
   host().apply(ctx,{templates:{get:()=>[{name:'g',text:'SYNTHETIC_GLOBAL'},{name:'w',text:'SYNTHETIC_WORK'}]},activeTemplate:{get:()=> 'g'},workspaceOverrides:{get:()=>({'D:/Synthetic':'w'})},excludeByPreset:{get:()=>enabled},excludedPresetIds:{get:()=>ids}})
@@ -42,6 +43,20 @@ test('current preset exclusion precedes workspace selection and is local to each
   current.delete(a);assert.throws(()=>read({agent:{session:a}}),/current Agent Preset unavailable/)
   assert.throws(()=>read({}),/current Agent Preset unavailable/)
   enabled=false;assert.equal(read({}),'SYNTHETIC_GLOBAL')
+})
+
+test('the owning preset service is preferred over the deprecated projection read',()=>{
+  let read,projectionReads=0,serviceReads=0
+  const session={header:{cwd:'D:/Synthetic'}}
+  const ctx={effect:fn=>fn(),settings:{configure:()=>()=>{}},get:key=>{
+    if(key==='agentPresets')return {presetForSession:s=>{assert.equal(s,session);serviceReads++;return 'roleplay'}}
+    assert.equal(key,'sessionProjections')
+    return {stateOf:()=>{projectionReads++;return 'standard'}}
+  },systemPrompt:{variable:(_,fn)=>{read=fn},section:()=>{}}}
+  host().apply(ctx,{templates:{get:()=>[{name:'g',text:'SYNTHETIC_GLOBAL'}]},activeTemplate:{get:()=>'g'},workspaceOverrides:{get:()=>({})},presetSelectionVersion:{get:()=>1},presetSelections:{get:()=>({roleplay:{mode:'none'}}),},excludeByPreset:{get:()=>false},excludedPresetIds:{get:()=>[]}})
+  assert.equal(read({agent:{session}}),'')
+  assert.equal(serviceReads,1)
+  assert.equal(projectionReads,0)
 })
 
 test('three-state mapping resolves preset before workspace and global; missing references never fall back',()=>{
