@@ -2,11 +2,19 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.5** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **24+**.
-- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5).
+- Package **0.1.6** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **24+**.
+- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.6 — isolated acceptance (2026-11-09)
+
+- Windows x64, shipped Desktop 0.2.2-rc.1 / Electron 44.7.0 / Node 24.21.0; 24 regression tests passed.
+- Offline recording provider captured 13 synthetic final requests per acceptance run: global/workspace/off, explicit Preset/none, three parallel sessions, genuine provider retry, native Fork/nested Fork and Complete Persona. Revision conflict rejection remained intact.
+- Actual Web settings renderer: Chinese/English, light/dark, 1100/900/640 px, keyboard focus and reduced motion; delayed roster refresh preserved table geometry and disabled stale controls. Preview did not change saved configuration.
+- The combined updated Exporter, Chat Comfort and Prompt Inject clients also passed with Claude Style 0.20.0. No host algorithm or compatibility gate was relaxed.
+- These are isolated synthetic checks, not private business-session certification or a guarantee for all providers, display hardware or third-party plugins. Preview remains an estimate; final assembled requests determine injection.
 
 ## 0.1.5 — 0.2.2-rc.1 compatibility (2026-11-05)
 

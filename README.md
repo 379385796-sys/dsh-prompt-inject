@@ -4,11 +4,13 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[English](README.en.md) · [下载 v0.1.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) · [兼容记录](docs/COMPATIBILITY.md)
+[English](README.en.md) · [下载 v0.1.6](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) · [兼容记录](docs/COMPATIBILITY.md)
 
 管理命名 System Prompt 模板，为每种 Agent 模式直接选择跟随默认、不注入或指定模板，支持工作区覆盖、动态预设识别与自动保存。
 
 这是 [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject) 的维护适配版，保留原作者版权与 MIT 许可，**不是上游官方发行**。来源与修改见 [UPSTREAM](docs/UPSTREAM.md)。
+
+**0.1.6 更新：** 诊断预览现在可以明确选择 Agent Preset，并显示预计来源；刷新模式列表保留原有行，保存与键盘焦点反馈更清楚。详见 [CHANGELOG](CHANGELOG.md)。
 
 ## 模板如何生效
 
@@ -32,9 +34,9 @@
 
 ## 安装
 
-当前版本为 **0.1.5**。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`。当前目标为 Windows Desktop **0.2.2-rc.1**；`0.2.0-rc.2` 与 `0.2.1-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
+当前版本为 **0.1.6**。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`。当前目标为 Windows Desktop **0.2.2-rc.1**；`0.2.0-rc.2` 与 `0.2.1-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
 
-1. 从 [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) 下载 `dsh-prompt-inject-0.1.5.tgz` 与同名 `.sha256`。
+1. 从 [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) 下载 `dsh-prompt-inject-0.1.6.tgz` 与同名 `.sha256`。
 2. 用 `Get-FileHash -Algorithm SHA256 -LiteralPath '<tgz完整路径>'` 核对校验值。
 3. 通过 DSH 插件管理器安装本地 tgz，或使用已配置的 CLI：
 
@@ -42,7 +44,7 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.5`。
+4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.6`。
 
 模板管理依赖宿主的 settings、systemPrompt、客户端设置表单、Cordis、Schemastery 和 React 接口；精确 peer 范围见 [package.json](package.json)。不依赖另外三款 DSH 插件，不应为绕过版本检查而手改宿主依赖。
 
@@ -51,7 +53,7 @@
 1. 打开 **设置 → 系统提示词注入**，直接进入完整管理页面。
 2. 点击“添加模板”，填写唯一名称与正文并保存。例如用“简洁回答”作为名称，正文写“回答时先给结论，再列必要依据。”
 3. 在“全局默认模板”选择该模板；需要例外时，在“按工作区覆盖”中单独选择。
-4. 在“当前配置概览”选择全局或工作区作为预览对象；下方“预计注入预览”显示已保存配置的解析结果与正文，不自动猜测当前聊天工作区。
+4. 展开高级区域的“预览与诊断”，选择工作区及 Agent Preset，检查预计模板、来源和正文。预览仅在本页生效，不保存选择、不发送模型请求，也不会猜测当前聊天目标。
 5. 发起下一次模型请求。是否进入最终提示词，应以最终组装或请求为准，面板预览不等于已经注入。
 
 模板以明文保存在 Profile 配置中，会进入模型请求与会话历史，fork 和备份也可能包含。请勿存放 API Key、密码或其他凭据。切换模板不会撤回已接受的请求、已有历史或压缩前缀。
@@ -78,7 +80,11 @@ npm run check
 
 该命令执行语法检查与现有合成回归，不访问个人 Profile。历史宿主验收见[兼容记录](docs/COMPATIBILITY.md)，版本变化见 [CHANGELOG](CHANGELOG.md)。
 
-真实 Windows RC5 设置页，使用公开示例配置；以下为 Web 渲染器截图，不展示私人 Prompt 或工作区路径。模式名称来自示例环境实际注册项，不表示插件内置 RP 功能。
+以下为 Windows DSH Desktop 0.2.2-rc.1 的实际 Web 设置页，使用隔离合成模板；不展示私人内容。预览显示预计解析结果，不代表最终请求已经注入。
+
+![模式分配与预览诊断入口](assets/preview-light.png)
+
+历史 RC5 模板与模式页面（示例配置）：
 
 ![模板管理与默认模板](assets/settings-zh.png)
 

@@ -4,11 +4,13 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[简体中文](README.md) · [Download v0.1.5](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5) · [Compatibility](docs/COMPATIBILITY.md)
+[简体中文](README.md) · [Download v0.1.6](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) · [Compatibility](docs/COMPATIBILITY.md)
 
 Manage named System Prompt templates, a default, workspace overrides and direct per-Agent mode choices. Dynamic preset discovery and automatic saves keep assignments clear.
 
 A maintained adaptation of [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject), retaining the original copyright and MIT license. **This is not an official upstream release.** See [upstream and changes](docs/UPSTREAM.md).
+
+**New in 0.1.6:** target a specific Agent Preset in diagnostics and see the expected source. Roster refreshes keep rows in place, with clearer save feedback and keyboard focus. See the [changelog](CHANGELOG.md).
 
 ## Template selection
 
@@ -32,9 +34,9 @@ These names illustrate selection rules; they are not built-in templates. A host 
 
 ## Installation
 
-Current version: **0.1.5**. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`. Windows Desktop **0.2.2-rc.1** is the current target; the `0.2.0-rc.2` and `0.2.1-rc.2` declarations are retained, not newly certified. Other platforms are untested.
+Current version: **0.1.6**. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`. Windows Desktop **0.2.2-rc.1** is the current target; the `0.2.0-rc.2` and `0.2.1-rc.2` declarations are retained, not newly certified. Other platforms are untested.
 
-1. Download `dsh-prompt-inject-0.1.5.tgz` and its `.sha256` from the [v0.1.5 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.5).
+1. Download `dsh-prompt-inject-0.1.6.tgz` and its `.sha256` from the [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6).
 2. Compare the checksum using `Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'`.
 3. Install the local tgz through DSH's plugin manager or a configured CLI:
 
@@ -42,7 +44,7 @@ Current version: **0.1.5**. Requires Node **24+** and declares DSH `0.2.0-rc.2 |
    dsh plugin --profile <profile> add <absolute-tgz-path>
    ```
 
-4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.5`.
+4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.6`.
 
 Template management requires host settings, systemPrompt, client configuration forms, Cordis, Schemastery, and React interfaces. Exact peer ranges are in [package.json](package.json). The other three DSH plugins are not required. Do not edit host dependencies to bypass compatibility checks.
 
@@ -51,7 +53,7 @@ Template management requires host settings, systemPrompt, client configuration f
 1. Open **Settings → System Prompt Injection** to enter the full page directly.
 2. Add a unique name and prompt text, then save. For example, name it “Concise answers” with text “Start with the conclusion, then give the necessary supporting details.”
 3. Select it under Default template. Set per-workspace exceptions as needed.
-4. Choose the global default or a workspace as the preview target in Current configuration. Expected injection preview shows the saved configuration result and text; it does not guess the current chat workspace.
+4. Open Preview and diagnostics in the advanced section. Choose a workspace and Agent Preset to inspect the expected template, source and text. These page-local choices do not save configuration, send a request or infer your current chat target.
 5. Send the next model request. Check the final assembled prompt or request to confirm injection; panel preview alone does not prove it.
 
 Templates are plaintext in the Profile configuration and enter model requests and session history; forks and backups may include them. Do not store credentials. Switching templates does not retract accepted requests, existing history, or compaction prefixes.
@@ -78,7 +80,11 @@ npm run check
 
 This checks syntax and existing synthetic regressions without accessing your personal Profile. See [historical host validation](docs/COMPATIBILITY.md) and [changelog](CHANGELOG.md).
 
-Actual Windows RC5 Web settings renderer with example configuration; no private prompts or workspace paths. Example preset declarations do not imply bundled RP functionality.
+Actual Windows DSH Desktop 0.2.2-rc.1 Web settings renderer with isolated synthetic templates. The preview shows expected selection, not proof of a transmitted request.
+
+![Native settings and Preset diagnostics](assets/preview-en.png)
+
+Historical RC5 template and mode pages (example configuration):
 
 ![Template management and default](assets/settings-en.png)
 

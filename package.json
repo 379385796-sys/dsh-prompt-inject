@@ -1,6 +1,6 @@
 {
   "name": "dsh-prompt-inject",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "System-prompt templates for DeepSeek Harness: default and workspace selection plus per-Agent Preset default, no-injection, or explicit template choices.",
   "type": "module",
   "main": "lib/index.js",

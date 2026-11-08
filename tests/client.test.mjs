@@ -56,7 +56,7 @@ function page(language='zh') {
   const refresh={error:null,load:async()=>{}}
   const roster={rows:[{id:'roleplay',name:'Roleplay'},{id:'character-forge',name:'Character Forge'},{id:'ordinary-synthetic',name:'Ordinary'}],fail:false}
   const ctx={
-    remote:{agentPresets:{list:async()=>roster.fail?{ok:false,error:{message:'SYNTHETIC_FAILURE'}}:{ok:true,value:{presets:roster.rows}}}},
+    remote:{agentPresets:{list:async()=>{if(roster.gate)await roster.gate;return roster.fail?{ok:false,error:{message:'SYNTHETIC_FAILURE'}}:{ok:true,value:{presets:roster.rows}}}}},
     effect:fn=>fn(),on:(event,fn)=>{events[event]=fn},
     locale:{register:(_ns,bundles)=>{Object.assign(dict,bundles);return ()=>{}},bind:ns=>key=>ns==='settings.agentPreset'?({zh:{presetStandardName:'标准模式',presetPtcName:'PTC 模式',presetMinimalName:'极简模式',presetCordisName:'创造模式'},en:{presetStandardName:'Standard mode',presetPtcName:'PTC mode',presetMinimalName:'Minimal mode',presetCordisName:'Creator mode'}}[locale][key]||key):dict[locale][key]},
     configForms:{get:entry=>{assert.equal(entry,'prompt-inject');return ctl},describe:()=>({load:()=>refresh.load(),getSnapshot:()=>({status:'ready',error:refresh.error})})},
@@ -124,6 +124,25 @@ test('preview chooses explicit workspace, handles disabled/inherit/missing, neve
   assert.ok(textOf(p.tree()).includes('预览工作区已不在列表中'))
   assert.equal(nodes(p.tree(),n=>n.props.className==='pt-previewBody').length,0)
 })
+
+test('explicit Preset preview uses the shared priority without saving or changing inherited row labels',async()=>{
+  const p=page();p.ctl.replace({value:{...config(),presetSelectionVersion:1,presetSelections:{roleplay:{mode:'template',template:'work'},'character-forge':{mode:'none'}}}});p.tree();await new Promise(setImmediate);
+  p.select('预览 Agent Preset').props.onChange({target:{value:'roleplay'}});
+  assert.ok(nodes(p.tree(),n=>n.props.className==='pt-previewBody').some(n=>textOf(n)==='\r\n  SYNTHETIC_WORK\n'));
+  assert.ok(textOf(p.tree()).includes('命中来源: Agent Preset 显式选择'));
+  assert.ok(textOf(p.select('Ordinary · ordinary-synthetic').children[0]).includes('global'));
+  p.target().props.onChange({target:{value:'off'}});assert.ok(nodes(p.tree(),n=>n.props.className==='pt-previewBody').length);
+  p.select('预览 Agent Preset').props.onChange({target:{value:'character-forge'}});assert.ok(textOf(p.tree()).includes('此 Agent Preset 不注入'));assert.equal(nodes(p.tree(),n=>n.props.className==='pt-previewBody').length,0);
+  p.select('预览 Agent Preset').props.onChange({target:{value:'roleplay'}});p.roster.rows=p.roster.rows.filter(r=>r.id!=='roleplay');await p.button('刷新').props.onClick();await new Promise(setImmediate);
+  assert.equal(p.select('预览 Agent Preset').props.value,'roleplay');assert.ok(p.select('预览 Agent Preset').children.some(o=>o.props.value==='roleplay'&&o.props.disabled));assert.ok(textOf(p.tree()).includes('预览预设不可用'));assert.equal(nodes(p.tree(),n=>n.props.className==='pt-previewBody').length,0);assert.equal(p.ctl.calls.length,0);
+  p.locale('en');assert.ok(textOf(p.tree()).includes('The preview preset is unavailable'));
+});
+
+test('roster refresh and errors retain table rows while disabling untrusted choices',async()=>{
+  const p=page();p.tree();await new Promise(setImmediate);const count=nodes(p.tree(),n=>n.props.className==='pt-modeRow').length;
+  let release;p.roster.gate=new Promise(r=>{release=r;});const refresh=p.button('刷新').props.onClick();assert.equal(nodes(p.tree(),n=>n.props.className==='pt-modeRow').length,count);assert.equal(p.select('Roleplay · roleplay').props.disabled,true);
+  p.roster.fail=true;release();await refresh;await new Promise(setImmediate);assert.equal(nodes(p.tree(),n=>n.props.className==='pt-modeRow').length,count);assert.equal(p.select('Roleplay · roleplay').props.disabled,true);assert.ok(textOf(p.tree()).includes('无法读取宿主预设'));assert.equal(p.ctl.calls.length,0);
+});
 
 test('editor preserves raw text and old data, scope operations and deletion safety',async()=>{
   const {plugin}=client(),ctl=controller(),edit=plugin.createEditor(ctl)

@@ -1,3 +1,11 @@
+## 0.1.6 — 2026-11-09
+
+- Add an explicit Agent Preset target to the existing workspace diagnostics. Use the shared selection resolver and show the expected source, no-injection state and unavailable preset without saving configuration or sending requests.
+- Distinguish expected selection from actual request injection. Preserve default-inheritance labels independently of the diagnostic target.
+- Keep roster rows visible during refresh and failure; disable stale choices until discovery succeeds. Refine native focus, hover, press and save feedback, with short opacity transitions and reduced-motion support.
+- Preserve the host injection algorithm, single section, revision fences, drafts and identity rejection. No keyword or regular-expression rule engine.
+- Validation: 24 Node 24 tests; isolated Desktop 0.2.2-rc.1 captured 13 synthetic provider requests covering workspace/global, explicit preset/none, parallel sessions, real retry, native Fork/nested Fork and Complete Persona. Native and Claude Style 0.20.0 UI checks passed. This does not certify private sessions or every provider.
+
 ## 0.1.5 — 2026-11-05
 
 - Add DSH Desktop **0.2.2-rc.1** to the verified host range; earlier declarations retained.
