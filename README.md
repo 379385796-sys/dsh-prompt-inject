@@ -4,13 +4,13 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[English](README.en.md) · [下载 v0.1.6](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) · [兼容记录](docs/COMPATIBILITY.md)
+[English](README.en.md) · [下载 v0.1.7](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7) · [兼容记录](docs/COMPATIBILITY.md)
 
 管理命名 System Prompt 模板，为每种 Agent 模式直接选择跟随默认、不注入或指定模板，支持工作区覆盖、动态预设识别与自动保存。
 
 这是 [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject) 的维护适配版，保留原作者版权与 MIT 许可，**不是上游官方发行**。来源与修改见 [UPSTREAM](docs/UPSTREAM.md)。
 
-**0.1.6 更新：** 诊断预览现在可以明确选择 Agent Preset，并显示预计来源；刷新模式列表保留原有行，保存与键盘焦点反馈更清楚。详见 [CHANGELOG](CHANGELOG.md)。
+**0.1.7 更新：** 兼容 DSH 0.2.2-rc.3；注入算法、模板选择与设置项均未改动，只扩展声明的宿主范围。详见 [CHANGELOG](CHANGELOG.md)。
 
 ## 模板如何生效
 
@@ -34,9 +34,9 @@
 
 ## 安装
 
-当前版本为 **0.1.6**。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`。当前目标为 Windows Desktop **0.2.2-rc.1**；`0.2.0-rc.2` 与 `0.2.1-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
+当前版本为 **0.1.7**。Node 要求 **24+**，声明的 DSH 范围为 `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`。当前目标为 Windows Desktop **0.2.2-rc.3**；`0.2.0-rc.2` 与 `0.2.1-rc.2` 是保留声明，不是本轮新验证。其他平台未验证。
 
-1. 从 [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) 下载 `dsh-prompt-inject-0.1.6.tgz` 与同名 `.sha256`。
+1. 从 [v0.1.7 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7) 下载 `dsh-prompt-inject-0.1.7.tgz` 与同名 `.sha256`。
 2. 用 `Get-FileHash -Algorithm SHA256 -LiteralPath '<tgz完整路径>'` 核对校验值。
 3. 通过 DSH 插件管理器安装本地 tgz，或使用已配置的 CLI：
 
@@ -44,7 +44,7 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.6`。
+4. 重启后核对包名 `dsh-prompt-inject`、配置入口 ID `prompt-inject`、版本 `0.1.7`。
 
 模板管理依赖宿主的 settings、systemPrompt、客户端设置表单、Cordis、Schemastery 和 React 接口；精确 peer 范围见 [package.json](package.json)。不依赖另外三款 DSH 插件，不应为绕过版本检查而手改宿主依赖。
 

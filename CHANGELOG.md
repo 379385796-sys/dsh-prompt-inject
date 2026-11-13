@@ -1,3 +1,10 @@
+## 0.1.7 — 2026-11-13
+
+- Add DSH Desktop **0.2.2-rc.3** to the verified host range; every earlier declaration is retained.
+- 0.2.2-rc.3 refuses to load a plugin whose `engines.dsh` does not name the running host, so 0.1.6 was skipped at boot on that host. `engines.dsh` and the three `@deepseek-ai/dsh-*` peer ranges now name 0.2.2-rc.3.
+- No behavioural change: `systemPrompt.variable`/`section`, `settings.configure({ auto: false }, ctx.fiber)`, `agentPresets.presetForSession` and the `sessionProjections.stateOf` fallback all keep their 0.2.2-rc.1 signatures in rc.3. Injection order, the single section, revision fences, drafts and identity rejection are untouched.
+- Validation: source-level check of the installed 0.2.2-rc.3 host packages for the four APIs above, plus a load check in the rc.3 Profile after installation. Unit tests were not rerun because `lib/` is byte-identical to 0.1.6.
+
 ## 0.1.6 — 2026-11-09
 
 - Add an explicit Agent Preset target to the existing workspace diagnostics. Use the shared selection resolver and show the expected source, no-injection state and unavailable preset without saving configuration or sending requests.

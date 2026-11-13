@@ -2,11 +2,18 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.6** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **24+**.
-- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6).
+- Package **0.1.7** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`; Node **24+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.3**. See [v0.1.7 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.7 — 0.2.2-rc.3 load range (2026-11-13)
+
+- Target: Windows x64 DSH Desktop 0.2.2-rc.3. The host refuses a plugin whose `engines.dsh` does not name the running version, so 0.1.6 was skipped at boot; 0.1.7 adds `0.2.2-rc.3` to `engines.dsh` and to the three `@deepseek-ai/dsh-*` peer ranges. Nothing else changed.
+- Host surfaces re-checked in the installed 0.2.2-rc.3 packages: `SystemPrompt.variable(name, provider)` and `section({ name, order, text })` in `dsh-system-prompt`, `Settings.configure({ auto?: boolean }, owner)` in `dsh-settings`, `presetForSession(session)` in `dsh-agent-preset-registry`.
+- The rc.3 upgrade notes touch runtime-context reminders, `Session.append` overloads and macOS window drag regions; this plugin reads templates from settings and writes one prompt section, so none of those apply. It never appends session events.
+- Evidence: source-level API check plus a load check in the rc.3 Profile after installation. The 0.1.6 thirty-test acceptance was not rerun — `lib/` is byte-identical, and no injection logic changed. This does not certify other platforms or third-party UI styles.
 
 ## 0.1.6 — isolated acceptance (2026-11-09)
 

@@ -4,13 +4,13 @@
 
 **Current Maintainer:** [379385796-sys](https://github.com/379385796-sys)
 
-[简体中文](README.md) · [Download v0.1.6](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6) · [Compatibility](docs/COMPATIBILITY.md)
+[简体中文](README.md) · [Download v0.1.7](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7) · [Compatibility](docs/COMPATIBILITY.md)
 
 Manage named System Prompt templates, a default, workspace overrides and direct per-Agent mode choices. Dynamic preset discovery and automatic saves keep assignments clear.
 
 A maintained adaptation of [H1a3x/dsh-prompt-inject](https://github.com/H1a3x/dsh-prompt-inject), retaining the original copyright and MIT license. **This is not an official upstream release.** See [upstream and changes](docs/UPSTREAM.md).
 
-**New in 0.1.6:** target a specific Agent Preset in diagnostics and see the expected source. Roster refreshes keep rows in place, with clearer save feedback and keyboard focus. See the [changelog](CHANGELOG.md).
+**New in 0.1.7:** DSH 0.2.2-rc.3 compatibility. The injection algorithm, template selection and settings are unchanged; only the declared host range grew. See the [changelog](CHANGELOG.md).
 
 ## Template selection
 
@@ -34,9 +34,9 @@ These names illustrate selection rules; they are not built-in templates. A host 
 
 ## Installation
 
-Current version: **0.1.6**. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`. Windows Desktop **0.2.2-rc.1** is the current target; the `0.2.0-rc.2` and `0.2.1-rc.2` declarations are retained, not newly certified. Other platforms are untested.
+Current version: **0.1.7**. Requires Node **24+** and declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`. Windows Desktop **0.2.2-rc.3** is the current target; the `0.2.0-rc.2` and `0.2.1-rc.2` declarations are retained, not newly certified. Other platforms are untested.
 
-1. Download `dsh-prompt-inject-0.1.6.tgz` and its `.sha256` from the [v0.1.6 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.6).
+1. Download `dsh-prompt-inject-0.1.7.tgz` and its `.sha256` from the [v0.1.7 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7).
 2. Compare the checksum using `Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'`.
 3. Install the local tgz through DSH's plugin manager or a configured CLI:
 
@@ -44,7 +44,7 @@ Current version: **0.1.6**. Requires Node **24+** and declares DSH `0.2.0-rc.2 |
    dsh plugin --profile <profile> add <absolute-tgz-path>
    ```
 
-4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.6`.
+4. Restart and verify package `dsh-prompt-inject`, configuration entry ID `prompt-inject`, and version `0.1.7`.
 
 Template management requires host settings, systemPrompt, client configuration forms, Cordis, Schemastery, and React interfaces. Exact peer ranges are in [package.json](package.json). The other three DSH plugins are not required. Do not edit host dependencies to bypass compatibility checks.
 
