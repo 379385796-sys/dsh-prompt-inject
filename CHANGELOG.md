@@ -1,3 +1,10 @@
+## 0.1.8 — 2026-11-19
+
+- Add DSH Desktop **0.2.2-rc.5** to the verified host range; every earlier declaration is retained.
+- 0.2.2-rc.5 refuses to load a plugin whose `engines.dsh` does not name the running host, so 0.1.7 was skipped at boot on that host. `engines.dsh` and the three `@deepseek-ai/dsh-*` peer ranges now name 0.2.2-rc.5.
+- Declaration-only release: `lib/` is byte-identical to 0.1.7 — no functional code change. `systemPrompt.variable`/`section`, `settings.configure({ auto: false }, ctx.fiber)`, `agentPresets.presetForSession` and the `sessionProjections.stateOf` fallback keep their rc.3 signatures in rc.5. Injection order, the single section, revision fences, drafts and identity rejection are untouched.
+- Validation: source-level check of the installed 0.2.2-rc.5 host and client packages for every host service/method, client service, Slot and Event the plugin uses; `node --check` on all three entry files, the generated browser-resolver sync check and all 24 tests pass. The suite was rerun because it is in-memory and needs no host or network; `lib/` stays byte-identical.
+
 ## 0.1.7 — 2026-11-13
 
 - Add DSH Desktop **0.2.2-rc.3** to the verified host range; every earlier declaration is retained.

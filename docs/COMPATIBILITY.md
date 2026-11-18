@@ -2,11 +2,20 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.7** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`; Node **24+**.
-- Current target: Windows x64 DSH Desktop **0.2.2-rc.3**. See [v0.1.7 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.7).
+- Package **0.1.8** declares DSH `0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3 || 0.2.2-rc.5`; Node **24+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.5**. See [v0.1.8 Release](https://github.com/379385796-sys/dsh-prompt-inject/releases/tag/v0.1.8).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.8 — 0.2.2-rc.5 load range (2026-11-19)
+
+- Target: Windows x64 DSH Desktop 0.2.2-rc.5. The host refuses a plugin whose `engines.dsh` does not name the running version, so 0.1.7 was skipped at boot; 0.1.8 adds `0.2.2-rc.5` to `engines.dsh` and to the three `@deepseek-ai/dsh-*` peer ranges. Declaration-only: `lib/` is byte-identical to 0.1.7.
+- Host gate revisited in the installed 0.2.2-rc.5 `dsh-app-boot`: an own `engines.dsh` range decides alone (`evaluatePluginCompatibility` → `unmetRequirements`, prereleases included); `peerDependencies` are only consulted when that range is absent. The three peer ranges are therefore declaration hygiene, not a load condition.
+- Host surfaces re-checked in the installed 0.2.2-rc.5 packages: `SystemPrompt.variable(name, provider)` and `SystemPrompt.section({ name, order, text })` in `dsh-system-prompt`; `Settings.configure(presentation, owner = ctx.fiber)` in `dsh-settings`; `presetForSession(session): string | null` in `dsh-agent-preset-registry`; the deprecated but still working `sessionProjections.stateOf(session, key)` in `dsh-session-projection`.
+- Client surfaces re-checked in the installed 0.2.2-rc.5 client bundles: Slot service `ctx.slots.inject/register` (`dsh-client-ui-renderer`) and the live Slot `settings.section` (`dsh-client-ui-settings-general`); `configForms.get(entryId)`/`describe()` (`dsh-client-ui-settings`); `locale.register/bind` (`ctx.provide('locale')` in `dsh-client-locale`); the `remote` service and its `$on` (`dsh-api-gateway`); the dotted `remote.agentPresets` scope used by the shipped `dsh-client-ui-agent-preset` (`ctx.remote.agentPresets.list()`); the forwarded `connection/reset` event emitted on reconnect. The `dsh.client.inject` target `@deepseek-ai/dsh-client-ui-settings` is present at 0.2.2-rc.5.
+- rc.3 → rc.5 code diff touches `dsh-llm`, `cordis-plugin-loader`, `cordis-plugin-include` and `cordis-plugin-timer` only; every package this plugin loads (system-prompt, settings, agent-preset-registry, session-projection, client UI packages, cordis 4.1.0) is unchanged apart from its version string.
+- Evidence: source-level verification against the installed `app.asar` packages, plus `node --check` on all three entry files, the generated browser-resolver sync check and the full 24-test in-memory suite. No Profile installation or live request capture was performed for this declaration-only maintenance, so a cold-load check on 0.2.2-rc.5 remains NOT TESTED; other platforms and third-party UI styles remain uncertified.
 
 ## 0.1.7 — 0.2.2-rc.3 load range (2026-11-13)
 
